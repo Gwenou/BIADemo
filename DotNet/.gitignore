@@ -7,8 +7,10 @@
 # Specific config files
 appsettings.*.json
 !appsettings.Example*.json
+!appsettings.Azure*.json
 bianetconfig.*.json
 !bianetconfig.Example*.json
+!bianetconfig.Azure*.json
 # End BIATemplate only
 
 # User-specific files
