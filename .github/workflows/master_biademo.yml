@@ -36,7 +36,6 @@ jobs:
 
       - name: dotnet bundle migration
         run: dotnet ef migrations bundle --runtime linux-x64 -p DotNet/TheBIADevCompany.BIADemo.Presentation.Api/TheBIADevCompany.BIADemo.Presentation.Api.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate
-        working-directory: DotNet
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
