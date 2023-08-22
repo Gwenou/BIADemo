@@ -1,0 +1,125 @@
+{
+  "BiaNet": {
+    "Environment": {
+      "Type": "DEV",
+      // UrlMatomo shoulld now contain the name of the php and js (originaly matomo.js & matomo.php) => rename to bypass ublock
+      "UrlMatomo": "https://matomo-int.the-shared-tools-domain-name.bia/matomo(torename)",
+      "SiteIdMatomo": "1"
+    },
+    "CommonFeatures": {
+      "ClientForHub": {
+        "SignalRUrl": "http://localhost/BIADemo/WebApi/HubForClients"
+      }
+    },
+    "ApiFeatures": {
+      "Swagger": {
+        "IsActive": true
+      },
+      "DelegateJobToWorker": {
+        "MonitoringUrl": "http://localhost/BIADemo/WebApi/hangfire"
+      }
+    },
+    "Security": {
+      "Audience": "http://localhost:4200"
+    },
+    "EmailConfiguration": {
+      "From": "noreply-BIADemo@the-mail-domain.bia",
+      "SmtpHost": "127.0.0.1",
+      "SmtpPort": 25
+    },
+    "Authentication": {
+      "Keycloak": {
+        "IsActive": false,
+        "BaseUrl": "http://localhost:8080",
+        "Configuration": {
+          "idpHint": "darwin",
+          "realm": "BIA-Realm",
+          "Authority": "/realms/BIA-Realm",
+          "RequireHttpsMetadata": false,
+          "ValidAudience": "account"
+        },
+        "Api": {
+          "TokenConf": {
+            "RelativeUrl": "/realms/BIA-Realm/protocol/openid-connect/token",
+            "ClientId": "biademo",
+            "GrantType": "password",
+            "CredentialKeyInWindowsVault": "BIA:KeycloakSearchUserAccount"
+          },
+          "SearchUserRelativeUrl": "/admin/realms/BIA-Realm/users"
+        }
+      },
+      "LdapDomains": [
+        {
+          "Name": "DOMAIN_BIA_1",
+          "LdapName": "the-user-domain1-name.bia",
+          "ContainsGroup": true,
+          "ContainsUser": true
+        },
+        {
+          "Name": "DOMAIN_BIA_2",
+          "LdapName": "the-user-domain2-name.bia",
+          "ContainsGroup": true,
+          "ContainsUser": true
+        } //,
+        //{
+        //  "Name": "DOMAIN_BIA_3",
+        //  "LdapName": "the-user-domain3-name.bia",
+        //  "CredentialKeyInWindowsVault": "BIA:LDAP://the-user-domain3-name.bia",
+        //  "ContainsGroup": true,
+        //  "ContainsUser": true
+        //},
+        //{
+        //  "Name": "DOMAIN_BIA_SRV",
+        //  "LdapName": "the-server-domain-name.bia",
+        //  "CredentialKeyInWindowsVault": "BIA:LDAP://the-server-domain-name.bia",
+        //  "ContainsGroup": true,
+        //  "ContainsUser": false
+        //}
+      ]
+    },
+    "Roles": [
+      {
+        "Label": "User",
+        "Type": "Fake"
+      },
+      {
+        "Label": "Admin",
+        "Type": "Fake"
+      }
+      //{
+      //  "Label": "User",
+      //  "Type": "Ldap",
+      //  "LdapGroups": [
+      //    {
+      //      "AddUsersOfDomains": [ "DOMAIN_BIA_1", "DOMAIN_BIA_2" ],
+      //      "RecursiveGroupsOfDomains": [ "DOMAIN_BIA_1", "DOMAIN_BIA_2" ],
+      //      "LdapName": "DOMAIN_BIA_1\\PREFIX-APP_BIADemo_INT_User",
+      //      "Domain": "DOMAIN_BIA_1"
+      //    }//,
+      //    //{
+      //    //  "AddUsersOfDomains": [ "DOMAIN_BIA_3" ],
+      //    //  "RecursiveGroupsOfDomains": [ "DOMAIN_BIA_3", "DOMAIN_BIA_SRV" ],
+      //    //  "LdapName": "DOMAIN_BIA_3\\PREFIX-APP_BIADemo_INT_User",
+      //    //  "ContainsOnlyUsers": true,
+      //    //  "Domain": "DOMAIN_BIA_SRV"
+      //    //}
+      //  ]
+      //},
+      //{
+      //  "Label": "Admin",
+      //  "Type": "Ldap",
+      //  "LdapGroups": [
+      //    {
+      //      "RecursiveGroupsOfDomains": [ "DOMAIN_BIA_1", "DOMAIN_BIA_2" ],
+      //      "LdapName": "DOMAIN_BIA_1\\PREFIX-APP_BIADemo_INT_Admin",
+      //      "Domain": "DOMAIN_BIA_1"
+      //    }
+      //  ]
+      //}
+    ],
+    "UserProfile": {
+      //remove url for faster debug
+      "url": ""
+    }
+  }
+}
