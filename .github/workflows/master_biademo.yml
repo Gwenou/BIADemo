@@ -24,15 +24,19 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+        working-directory: DotNet
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: DotNet
 
       - name: dotnet install ef
         run: dotnet tool install - g dotnet-ef
+        working-directory: DotNet
 
       - name: dotnet bundle migration
-        run: dotnet ef migrations bundle --runtime linux-x64 -p DotNet/TheBIADevCompany.BIADemo.Presentation.Api/TheBIADevCompany.BIADemo.Presentation.Api.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate.
+        run: dotnet ef migrations bundle --runtime linux-x64 -p DotNet/TheBIADevCompany.BIADemo.Presentation.Api/TheBIADevCompany.BIADemo.Presentation.Api.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate
+        working-directory: DotNet
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
