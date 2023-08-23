@@ -26,9 +26,17 @@ jobs:
         run: dotnet build --configuration Release
         working-directory: DotNet
 
-      - name: dotnet publish
+      - name: dotnet publish WebApi
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-        working-directory: DotNet
+        working-directory: DotNet/TheBIADevCompany.BIADemo.Presentation.Api
+
+      - name: dotnet publish DeployDB
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: DotNet/TheBIADevCompany.BIADemo.DeployDB
+
+      - name: dotnet publish WorkerService
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: DotNet/TheBIADevCompany.BIADemo.WorkerService
 
       # - name: dotnet install ef
       #   run: dotnet tool install -g dotnet-ef
