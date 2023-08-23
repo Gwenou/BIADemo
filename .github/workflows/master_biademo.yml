@@ -27,7 +27,7 @@ jobs:
         working-directory: DotNet
 
       - name: dotnet publish WebApi
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp/WebApi
         working-directory: DotNet/TheBIADevCompany.BIADemo.Presentation.Api
 
       - name: dotnet publish DeployDB
